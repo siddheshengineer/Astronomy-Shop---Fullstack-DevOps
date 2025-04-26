@@ -1,0 +1,9 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: astronomy-dev
+servers: 1
+agents: 2
+image: rancher/k3s:v1.32.3-k3s1
+
+# k3d cluster create --port "8080:8080@loadbalancer" --config ./cluster-config.yaml  ##--image rancher/k3s:+v1.32
