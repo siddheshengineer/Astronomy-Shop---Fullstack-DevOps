@@ -1,0 +1,8 @@
+
+
+## Deployment Images
+
+# Accounting Service
+accountingservice:
+  image_name: ghcr.io/open-telemetry/demo
+  tag: 1.12.0-accountingservice
