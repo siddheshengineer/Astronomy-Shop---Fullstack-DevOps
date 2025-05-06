@@ -1562,7 +1562,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: quoteservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-quoteservice'
+          image: {{ .Values.image_name}}:{{ .Values.quoteservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1628,7 +1628,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: recommendationservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-recommendationservice'
+          image: {{ .Values.image_name}}:{{ .Values.recommendationservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1695,7 +1695,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: shippingservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-shippingservice'
+          image: {{ .Values.image_name}}:{{ .Values.shippingservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1756,7 +1756,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: valkey
-          image: 'valkey/valkey:7.2-alpine'
+          image: {{ .Values.valkey.image_name}}:{{ .Values.valkey.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             

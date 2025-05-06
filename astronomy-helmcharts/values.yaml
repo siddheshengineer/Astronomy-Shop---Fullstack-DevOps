@@ -61,8 +61,23 @@ loadgenerator:
 paymentservice:
   tag: 1.12.0-paymentservice
 
+# Product Catalog Service
 productcatalogservice:
   tag: 1.12.0-productcatalogservice
 
+# Quotes Service
+quoteservice:
+  tag: 1.12.0-quoteservice
 
-#image: {{ .Values.image_name}}:{{ .Values.productcatalogservice.tag }}
+# Recommendation Service
+recommendationservice:
+  tag: 1.12.0-recommendationservice
+
+# Shipping Service
+shippingservice:
+  tag: 1.12.0-shippingservice
+
+# Valkey
+valkey:
+  image_name: valkey/valkey
+  tag: 7.2-alpine
