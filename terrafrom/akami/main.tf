@@ -2,7 +2,6 @@ terraform {
   required_providers {
     linode = {
       source = "linode/linode"
-      version = "2.7.1"
     }
   }
 }
@@ -30,7 +29,7 @@ resource "linode_lke_cluster" "astronomy_cluster" {
 
 //Export this cluster's attributes
 output "kubeconfig" {
-  value = linode_lke_cluster.foobar.kubeconfig
+  value = linode_lke_cluster.astronomy_cluster.kubeconfig
   sensitive = true
 }
 

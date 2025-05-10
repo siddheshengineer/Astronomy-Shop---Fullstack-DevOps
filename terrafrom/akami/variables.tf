@@ -31,8 +31,8 @@ variable "pools" {
   }))
   default = [
     {
-     // type = "g6-standard-4"
-      count = 3
+      type = "g6-standard-4"
+      count = 2
     },
     //{
      // type = "g6-standard-8"
