@@ -1,0 +1,83 @@
+
+
+## Deployment Images
+#image_name: docker.io/siddheshdevops/astronomy_project
+image_name: ghcr.io/open-telemetry/demo
+
+# Accounting Service
+accountingservice:
+  tag: 1.12.0-accountingservice
+
+# Ad Service
+adservice:
+  tag: 1.12.0-adservice
+
+# Cart Service
+cartservice:
+  tag: 1.12.0-cartservice
+
+# Checkout Service
+checkoutservice:
+  tag: 1.12.0-checkoutservice
+
+# Curreny Service
+currencyservice:
+  tag: 1.12.0-currencyservice
+
+# Email Service
+emailservice:
+  tag: 1.12.0-emailservice
+
+# Falgd service
+flagd:
+  image_name: ghcr.io/open-feature/flagd
+  tag: v0.11.1 
+
+# Fraud detection Service
+frauddetectionservice:
+  tag: 1.12.0-frauddetectionservice
+
+# FrontEnd Service
+frontend:
+  tag: 1.12.0-frontend
+
+# FrontEnd Proxy Service
+frontendproxy:
+  tag: 1.12.0-frontendproxy
+
+# Image provider
+imageprovider:
+  tag: 1.12.0-imageprovider
+
+# Kafka
+kafka:
+  tag: 1.12.0-kafka
+
+# Load generator
+loadgenerator:
+  tag: 1.12.0-loadgenerator
+
+# Payment Service
+paymentservice:
+  tag: 1.12.0-paymentservice
+
+# Product Catalog Service
+productcatalogservice:
+  tag: 1.12.0-productcatalogservice
+
+# Quotes Service
+quoteservice:
+  tag: 1.12.0-quoteservice
+
+# Recommendation Service
+recommendationservice:
+  tag: 1.12.0-recommendationservice
+
+# Shipping Service
+shippingservice:
+  tag: 1.12.0-shippingservice
+
+# Valkey
+valkey:
+  image_name: valkey/valkey
+  tag: 7.2-alpine

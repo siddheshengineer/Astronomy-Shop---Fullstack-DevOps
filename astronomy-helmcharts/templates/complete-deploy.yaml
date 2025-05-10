@@ -414,7 +414,6 @@ kind: Deployment
 metadata:
   name: opentelemetry-demo-accountingservice
   labels:
-    
     opentelemetry.io/name: opentelemetry-demo-accountingservice
     app.kubernetes.io/instance: opentelemetry-demo
     app.kubernetes.io/component: accountingservice
@@ -440,7 +439,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: accountingservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-accountingservice'
+          image: {{ .Values.image_name}}:{{ .Values.accountingservice.tag }}
           imagePullPolicy: IfNotPresent
           env:
             - name: OTEL_SERVICE_NAME
@@ -504,7 +503,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: adservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-adservice'
+          image: {{ .Values.image_name}}:{{ .Values.adservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -570,10 +569,9 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: cartservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-cartservice'
+          image: {{ .Values.image_name}}:{{ .Values.cartservice.tag }}
           imagePullPolicy: IfNotPresent
-          ports:
-            
+          ports:  
             - containerPort: 8080
               name: service
           env:
@@ -646,7 +644,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: checkoutservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-checkoutservice'
+          image: {{ .Values.image_name}}:{{ .Values.checkoutservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -732,7 +730,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: currencyservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-currencyservice'
+          image: {{ .Values.image_name}}:{{ .Values.currencyservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -794,7 +792,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: emailservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-emailservice'
+          image: {{ .Values.image_name}}:{{ .Values.emailservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -856,7 +854,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: flagd
-          image: 'ghcr.io/open-feature/flagd:v0.11.1'
+          image: {{ .Values.flagd.image_name }}:{{ .Values.flagd.tag }}
           imagePullPolicy: IfNotPresent
           command:
             - /flagd-build
@@ -969,7 +967,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: frauddetectionservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-frauddetectionservice'
+          image: {{ .Values.image_name}}:{{ .Values.frauddetectionservice.tag }}
           imagePullPolicy: IfNotPresent
           env:
             - name: OTEL_SERVICE_NAME
@@ -1037,6 +1035,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: frontend
+          image: {{ .Values.image_name}}:{{ .Values.frontend.tag }}
           image: 'ghcr.io/open-telemetry/demo:1.12.0-frontend'
           imagePullPolicy: IfNotPresent
           ports:
@@ -1127,7 +1126,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: frontendproxy
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-frontendproxy'
+          image: {{ .Values.image_name}}:{{ .Values.frontendproxy.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1223,7 +1222,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: imageprovider
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-imageprovider'
+          image: {{ .Values.image_name}}:{{ .Values.imageprovider.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1285,7 +1284,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: kafka
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-kafka'
+          image: {{ .Values.image_name}}:{{ .Values.kafka.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1353,7 +1352,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: loadgenerator
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-loadgenerator'
+          image: {{ .Values.image_name}}:{{ .Values.loadgenerator.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1431,7 +1430,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: paymentservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-paymentservice'
+          image: {{ .Values.image_name}}:{{ .Values.paymentservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1499,7 +1498,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: productcatalogservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-productcatalogservice'
+          image: {{ .Values.image_name}}:{{ .Values.productcatalogservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1563,7 +1562,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: quoteservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-quoteservice'
+          image: {{ .Values.image_name}}:{{ .Values.quoteservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1629,7 +1628,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: recommendationservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-recommendationservice'
+          image: {{ .Values.image_name}}:{{ .Values.recommendationservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1696,7 +1695,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: shippingservice
-          image: 'ghcr.io/open-telemetry/demo:1.12.0-shippingservice'
+          image: {{ .Values.image_name}}:{{ .Values.shippingservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1757,7 +1756,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: valkey
-          image: 'valkey/valkey:7.2-alpine'
+          image: {{ .Values.valkey.image_name}}:{{ .Values.valkey.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
