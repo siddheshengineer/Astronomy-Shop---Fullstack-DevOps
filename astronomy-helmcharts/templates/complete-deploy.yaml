@@ -421,7 +421,7 @@ metadata:
     app.kubernetes.io/version: "1.12.0"
     app.kubernetes.io/part-of: opentelemetry-demo
 spec:
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -459,7 +459,8 @@ spec:
               value: service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=1.12.0
           resources:
             limits:
-              memory: 120Mi
+              cpu: 50m
+              memory: 60Mi
           volumeMounts:
       initContainers:
         - command:
@@ -485,7 +486,7 @@ metadata:
     app.kubernetes.io/version: "1.12.0"
     app.kubernetes.io/part-of: opentelemetry-demo
 spec:
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -533,7 +534,8 @@ spec:
               value: service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=1.12.0
           resources:
             limits:
-              memory: 300Mi
+              cpu: 50m
+              memory: 60Mi
           volumeMounts:
       volumes:
 ---
@@ -600,7 +602,7 @@ spec:
               value: service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=1.12.0
           resources:
             limits:
-              memory: 160Mi
+              memory: 50Mi
           volumeMounts:
       initContainers:
         - command:
@@ -883,7 +885,7 @@ spec:
               value: service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=1.12.0
           resources:
             limits:
-              memory: 75Mi
+              memory: 40Mi
           volumeMounts:
             - name: config-rw
               mountPath: /etc/flagd
@@ -949,7 +951,7 @@ metadata:
     app.kubernetes.io/version: "1.12.0"
     app.kubernetes.io/part-of: opentelemetry-demo
 spec:
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -991,7 +993,8 @@ spec:
               value: service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=1.12.0
           resources:
             limits:
-              memory: 300Mi
+              cpu: 50m
+              memory: 100Mi
           volumeMounts:
       initContainers:
         - command:
@@ -1086,7 +1089,7 @@ spec:
               value: service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=1.12.0
           resources:
             limits:
-              memory: 250Mi
+              memory: 100Mi
           securityContext:
             runAsGroup: 1001
             runAsNonRoot: true
@@ -1266,7 +1269,7 @@ metadata:
     app.kubernetes.io/version: "1.12.0"
     app.kubernetes.io/part-of: opentelemetry-demo
 spec:
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -1312,7 +1315,7 @@ spec:
               value: service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=1.12.0
           resources:
             limits:
-              memory: 600Mi
+              memory: 60Mi
           securityContext:
             runAsGroup: 1000
             runAsNonRoot: true
@@ -1334,7 +1337,7 @@ metadata:
     app.kubernetes.io/version: "1.12.0"
     app.kubernetes.io/part-of: opentelemetry-demo
 spec:
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -1394,7 +1397,8 @@ spec:
               value: service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=1.12.0
           resources:
             limits:
-              memory: 1500Mi
+              cpu: "20m"
+              memory: 15Mi
           volumeMounts:
       volumes:
 ---
@@ -1662,7 +1666,7 @@ spec:
               value: service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=1.12.0
           resources:
             limits:
-              memory: 500Mi
+              memory: 60Mi
           volumeMounts:
       volumes:
 ---
