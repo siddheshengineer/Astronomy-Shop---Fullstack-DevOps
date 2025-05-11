@@ -1,21 +1,20 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: astronomy-ingress
-  namespace: argocd
-  annotations:
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: 172-105-2-158.ip.linodeusercontent.com
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: argocd-server
-                port:
-                  name: https
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: argocd-ingress
+#   namespace: argocd
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: "/$1"
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#     - host: astronomy.siddheshnikam.online
+#       http:
+#         paths:
+#           - pathType: ImplementationSpecific
+#             path: "/argocd(/|$)(.*)"
+#             backend:
+#               service:
+#                 name: argocd-server
+#                 port:
+#                   number: 80

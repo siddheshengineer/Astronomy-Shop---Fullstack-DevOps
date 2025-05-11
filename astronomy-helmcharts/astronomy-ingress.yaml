@@ -18,3 +18,10 @@ spec:
                 name: opentelemetry-demo-frontendproxy
                 port:
                   number: 8080
+          # - path: "/argocd"
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: argocd-server.argocd.svc.cluster.local
+          #       port:
+          #         number: 80
