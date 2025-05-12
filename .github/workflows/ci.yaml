@@ -1,0 +1,53 @@
+name: Astronomy CI Pipeline
+
+# ────── Triggers ────────────────────────────────────────────────
+on:
+  push:
+    branches: ['main', 'LKE']
+    paths:
+      - 'src/**'
+  pull_request:
+    branches: ['main', 'LKE']
+    paths:
+        - 'src/**' 
+
+# ────── Global Permissions ────────────────────────────────────────
+permissions:
+  contents: read
+  packages: write
+  security-events: write
+
+# ────── Jobs ──────────────────────────────────────────────────────
+jobs:
+# ────── Jobs 1 ────────────────────────────────────────────────────
+  get_changed_folder:
+    name: Getting updated Service 
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ .steps.set-matrix.outputs.matrix }}
+      count: $ {{.steps.set-matrix.outputs.count }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Changed Folder
+        id: changed-folder
+        uses: tj-actions/changed-files@v46
+        with:
+          since_last_remote_commit: true
+
+      - name: Get changed files and write the outputs to a Txt file
+        shell: bash
+        run: | 
+          printf '%s\n' "$ {{ steps.changed-folder.outputs.all_changed_files }}" 
+
+
+
+
+
+      
+    
