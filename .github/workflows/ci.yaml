@@ -40,10 +40,8 @@ jobs:
         with:
           since_last_remote_commit: true
 
-      - name: Get changed files and write the outputs to a Txt file
-        shell: bash
-        run: | 
-          printf '%s\n' "$ {{ steps.changed-folder.outputs.all_changed_files }}" 
+      - name: Dump raw output
+        run: echo '${{ steps.changed-folder.outputs.all_changed_files }}'
 
 
 
