@@ -24,9 +24,9 @@ jobs:
     name: Getting updated Service 
     runs-on: ubuntu-latest
 
-    outputs:
-      matrix: ${{ .steps.set-matrix.outputs.matrix }}
-      count: $ {{.steps.set-matrix.outputs.count }}
+    # outputs:
+    #   matrix: ${{ .steps.set-matrix.outputs.matrix }}
+    #   count: $ {{.steps.set-matrix.outputs.count }}
 
     steps:
       - name: Checkout code
