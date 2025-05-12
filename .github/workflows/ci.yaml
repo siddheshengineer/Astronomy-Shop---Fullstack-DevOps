@@ -45,7 +45,7 @@ jobs:
         shell: bash
         run: |
           # Create array for changed folders in '/src'
-          makefile -t services < <(
+          mapfile -t services < <(
             printf '%s\n' "${{ steps.changed-folder.outputs.all_changed_files }}" \
             tr ',' '\n'
             grep '^src/'
