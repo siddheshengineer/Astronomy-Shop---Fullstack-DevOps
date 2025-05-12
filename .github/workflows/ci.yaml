@@ -46,22 +46,26 @@ jobs:
         run: |
           # Create array for changed folders in '/src'
           mapfile -t services < <(
-            printf '%s\n' "${{ steps.changed-folder.outputs.all_changed_files }}" \
-            tr ' ' '\n'
-            grep '^src/'
-            awk -F/ '{print $2}'
+            printf '%s\n' "${{ steps.changed-folder.outputs.all_changed_files }}" |
+            tr ' ' '\n' |
+            grep '^src/' |
+            awk -F/ '{print $2}' |
             sort -u
           )
 
-          # Build a Json object of the array
-          json=$(printf '%s\n' "${services[@]}") | jq -R -s -c 'split("\n")[:-1]'
+          # Convert to JSON array
+          json=$(printf '%s\n' "${services[@]}" | jq -R -s -c 'split("\n")[:-1]')
 
           # outputs
-          echo "matrix={\"service\":$json}" >> "$GITHUB_OUTPUT"
-          echo "count=$(echo "$json" | jq 'length')" >> "$GITHUB_OUTPUT"
-          \n 
-          echo "Matrix → ${{ steps.set-matrix.outputs.matrix }}"\n 
-          echo "Service count → ${{ steps.set-matrix.outputs.count }}"\n`
+          echo "matrix={\"service\":$json}" >>"$GITHUB_OUTPUT"
+          echo "count=$(echo "$json" | jq 'length')" >>"$GITHUB_OUTPUT"
+          echo #####
+          echo "Service: ${services[*]}"
+      
+      - name: Changes services
+        run: |
+          echo "Service Matrix: ${{ steps.set-matrix.outputs.matrix }}"
+          echo "No. of Service changed: ${{ steps.set-matrix.outputs.count }}"
 
 
 
