@@ -60,12 +60,11 @@ jobs:
           echo "matrix={\"service\":$json}" >>"$GITHUB_OUTPUT"
           echo "count=$(echo "$json" | jq 'length')" >>"$GITHUB_OUTPUT"
           echo #####
-          echo "Service: ${services[*]}"
+          echo "Services changed: ${services[*]}"
       
-      - name: Changes services
+      - name: No. of Changes services
         run: |
-          echo "Service Matrix: ${{ steps.set-matrix.outputs.matrix }}"
-          echo "No. of Service changed: ${{ steps.set-matrix.outputs.count }}"
+          echo "${{ steps.set-matrix.outputs.count }}"
 
 
 
