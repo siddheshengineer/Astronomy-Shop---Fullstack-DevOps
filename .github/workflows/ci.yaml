@@ -47,14 +47,14 @@ jobs:
           # Create array for changed folders in '/src'
           mapfile -t services < <(
             printf '%s\n' "${{ steps.changed-folder.outputs.all_changed_files }}" \
-            tr ',' '\n'
+            tr ' ' '\n'
             grep '^src/'
             awk -F/ '{print $2}'
             sort -u
           )
 
           # Build a Json object of the array
-          json=$(print '%s\n' "${services[@]}") | jq -R -s -c 'split("\n")[:-1]'
+          json=$(printf '%s\n' "${services[@]}") | jq -R -s -c 'split("\n")[:-1]'
 
           # outputs
           echo "matrix={\"service\":$json}" >> "$GITHUB_OUTPUT"
