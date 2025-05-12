@@ -24,9 +24,9 @@ jobs:
     name: Getting updated Service 
     runs-on: ubuntu-latest
 
-    # outputs:
-    #   matrix: ${{ .steps.set-matrix.outputs.matrix }}
-    #   count: $ {{.steps.set-matrix.outputs.count }}
+    outputs:
+      matrix: ${{ .steps.set-matrix.outputs.matrix }}
+      count: $ {{.steps.set-matrix.outputs.count }}
 
     steps:
       - name: Checkout code
@@ -39,9 +39,26 @@ jobs:
         uses: tj-actions/changed-files@v46
         with:
           since_last_remote_commit: true
+        
+      - name: Matrix
+        id: set-matrix
+        shell: bash
+        run: |
+          # Create array for changed folders in '/src'
+          makefile -t services < <(
+            printf '%s\n' "${{ steps.changed-folder.outputs.all_changed_files }}" \
+            tr ',' '\n'
+            grep '^src/'
+            awk -F/ '{print $2}'
+            sort -u
+          )
 
-      - name: Dump raw output
-        run: echo '${{ steps.changed-folder.outputs.all_changed_files }}'
+          # Build a Json object of the array
+          json=$(print '%s\n' "${services[@]}") | jq -R -s -c 'split("\n")[:-1]'
+
+          # outputs
+          echo "matrix={\"service\":$json}" >> "$GITHUB_OUTPUT"
+          echo "count=$(echo "$json" | jq 'length')" >> "$GITHUB_OUTPUT"
 
 
 

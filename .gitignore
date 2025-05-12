@@ -50,7 +50,6 @@ test/tracetesting/tracetesting-vars.yaml
 
 # Android
 *.apk
-.env
 
 !src/currency/build
 
