@@ -11,14 +11,11 @@ on:
     paths:
         - 'src/**' 
 
-# ────── Global Permissions and variables ────────────────────────────────────────
+# ────── Global Permissions ────────────────────────────────────────
 permissions:
   contents: read
   packages: write
   security-events: write
-
-env:
-  REGISTRY: docker.io
 
 # ────── Jobs ──────────────────────────────────────────────────────
 jobs:
@@ -84,7 +81,7 @@ jobs:
       matrix: ${{ fromJson(needs.get_changed_folder.outputs.matrix) }}
     
     env:
-      CONTAINER_REPO: ${{ env.REGISTRY}}/${{ secrets.REG_USER }}/${{ secrets.CONTAINER_REPOSITORY_NAME }}
+      REGISTRY: docker.io
 
     steps:
       - name: Checkout code
@@ -106,7 +103,7 @@ jobs:
           context: ./src/${{ matrix.service }}
           push: true
           load: true
-          tags: ${{ env.CONTAINER_REPO }}:${{ github.run_number }}-${{ matrix.service }}
+          tags: ${{ env.REGISTRY}}/${{ secrets.REG_USER }}/${{ secrets.CONTAINER_REPOSITORY_NAME }}:${{ github.run_number }}-${{ matrix.service }}
           
 
 
