@@ -100,9 +100,9 @@ jobs:
         run: |
           {
             echo 'BUILDARGS<<EOF'
-            grep -v '^[[:space:]]*#' .env 
+            grep -v '^[[:space:]]*#' .env          # keep non-comment lines
             echo 'EOF'
-          } >> "$GITHUB_OUTPUT""
+          } >> "$GITHUB_OUTPUT"
 
       - name: Setup Docker
         uses: docker/setup-buildx-action@v3
