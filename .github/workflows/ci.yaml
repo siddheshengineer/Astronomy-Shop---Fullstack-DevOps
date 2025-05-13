@@ -71,7 +71,9 @@ jobs:
   build_container_images:
     name: Build container images 
     needs: [get_changed_folder]
-    if: ${{ fromJson(needs.get_changed_folder.outputs.matrix).service != [] }} # skip if nothing has changed
+
+    # Skip the job entirely when the service list is empty
+    if: ${{ needs.get_changed_folder.outputs.count != '0' }}
     runs-on: ubuntu-latest  
     
     strategy:
@@ -81,7 +83,7 @@ jobs:
     env:
       REGISTRY: docker.io
       DOCKER_USER: ${{ secrets.REG_USER }}
-      DOCKER_REPO: ${{ secrets.CONTAINER_REPOSITORY_NAME }} 
+      DOCKER_REPO: ${{ secrets.CONTAINER_REPOSITORY_NAME }}
       CONTAINER_REPO: ${{ env.REGISTRY }}/${{ env.DOCKER_USER }}/${{ env.DOCKER_REPO }}
 
     steps:
@@ -103,8 +105,9 @@ jobs:
         with:
           context: ./src/${{ matrix.service }}
           push: true
-          tags: ${{ env.CONTAINER_REPO }}:${{ github.run_number }}-${{ matrix.service }}
           load: true
+          tags: ${{ env.CONTAINER_REPO }}:${{ github.run_number }}-${{ matrix.service }}
+          
 
 
 
