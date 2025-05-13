@@ -94,6 +94,16 @@ jobs:
           username: ${{ secrets.REG_USER }}
           password: ${{ secrets.REG_TOKEN }}  
 
+      - name: Read .env arguments
+        id: env-arg
+        shell: bash
+        run: |
+          {
+            echo 'BUILDARGS<<EOF'
+            grep -v '^[[:space:]]*#' .env 
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT""
+
       - name: Setup Docker
         uses: docker/setup-buildx-action@v3
 
@@ -107,6 +117,7 @@ jobs:
           push: true
           load: true
           tags: ${{ env.IMAGE_NAME }}:${{ github.run_number }}-${{ matrix.service }}service
+          build-args: ${{ steps.env-arg.outputs.BUILDARGS }}
           
 
 
