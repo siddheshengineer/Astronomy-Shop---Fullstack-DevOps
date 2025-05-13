@@ -98,12 +98,15 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build Docker Image
+        env:
+          IMAGE_NAME: ${{ env.REGISTRY }}/${{ secrets.REG_USER }}/${{ secrets.CONTAINER_REPOSITORY_NAME }}
         uses: docker/build-push-action@v6
         with:
-          context: ./src/${{ matrix.service }}
+          context: .
+          file: ./src/${{ matrix.service }}/Dockerfile
           push: true
           load: true
-          tags: ${{ env.REGISTRY}}/${{ secrets.REG_USER }}/${{ secrets.CONTAINER_REPOSITORY_NAME }}:${{ github.run_number }}-${{ matrix.service }}
+          tags: ${{ env.IMAGE_NAME }}:${{ github.run_number }}-${{ matrix.service }}service
           
 
 
