@@ -81,10 +81,9 @@ jobs:
       matrix: ${{ fromJson(needs.get_changed_folder.outputs.matrix) }}
     
     env:
-      REGISTRY: docker.io
       DOCKER_USER: ${{ secrets.REG_USER }}
       DOCKER_REPO: ${{ secrets.CONTAINER_REPOSITORY_NAME }}
-      CONTAINER_REPO: ${{ env.REGISTRY }}/${{ env.DOCKER_USER }}/${{ env.DOCKER_REPO }}
+      CONTAINER_REPO: docker.io/${{ env.DOCKER_USER }}/${{ env.DOCKER_REPO }}
 
     steps:
       - name: Checkout code
