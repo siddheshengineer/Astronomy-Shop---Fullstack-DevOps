@@ -71,13 +71,12 @@ jobs:
   build_container_images:
     name: Build container images 
     needs: [get_changed_folder]
-    if: ${{ fromJson(needs.get_changed_folder.output.matrix).service != [] }} # skip if nothing has changed
+    if: ${{ fromJson(needs.get_changed_folder.outputs.matrix).service != [] }} # skip if nothing has changed
     runs-on: ubuntu-latest  
     
     strategy:
       fail-fast: true
-      matrix: 
-        value: ${{ fromJson(needs.get_changed_folder.output.matrix) }}
+      matrix: ${{ fromJson(needs.get_changed_folder.outputs.matrix) }}
     
     env:
       REGISTRY: docker.io
