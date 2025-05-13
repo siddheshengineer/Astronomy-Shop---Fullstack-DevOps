@@ -11,11 +11,14 @@ on:
     paths:
         - 'src/**' 
 
-# ────── Global Permissions ────────────────────────────────────────
+# ────── Global Permissions and variables ────────────────────────────────────────
 permissions:
   contents: read
   packages: write
   security-events: write
+
+env:
+  REGISTRY: docker.io
 
 # ────── Jobs ──────────────────────────────────────────────────────
 jobs:
@@ -81,9 +84,7 @@ jobs:
       matrix: ${{ fromJson(needs.get_changed_folder.outputs.matrix) }}
     
     env:
-      DOCKER_USER: ${{ secrets.REG_USER }}
-      DOCKER_REPO: ${{ secrets.CONTAINER_REPOSITORY_NAME }}
-      CONTAINER_REPO: docker.io/${{ env.DOCKER_USER }}/${{ env.DOCKER_REPO }}
+      CONTAINER_REPO: ${{ env.REGISTRY}}/${{ secrets.REG_USER }}/${{ secrets.CONTAINER_REPOSITORY_NAME }}
 
     steps:
       - name: Checkout code
