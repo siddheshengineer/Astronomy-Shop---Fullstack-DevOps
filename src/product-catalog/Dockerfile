@@ -22,6 +22,7 @@ FROM gcr.io/distroless/static-debian12:nonroot
 WORKDIR /usr/src/app/
 
 COPY --from=builder /usr/src/app/product-catalog/ ./
+COPY --from=builder /usr/src/app/products ./products
 
 EXPOSE ${PRODUCT_CATALOG_PORT}
 ENTRYPOINT [ "./product-catalog" ]
