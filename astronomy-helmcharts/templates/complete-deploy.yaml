@@ -969,7 +969,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: frauddetectionservice
-          image: {{ .Values.image_name}}:{{ .Values.frauddetectionservice.tag }}
+          image: {{ .Values.image_name}}:{{ .Values.fraud-detectionservice.tag }}
           imagePullPolicy: IfNotPresent
           env:
             - name: OTEL_SERVICE_NAME
@@ -1502,7 +1502,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: productcatalogservice
-          image: {{ .Values.image_name}}:{{ .Values.productcatalogservice.tag }}
+          image: {{ .Values.pvt_image_name}}:{{ .Values.product-catalogservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             

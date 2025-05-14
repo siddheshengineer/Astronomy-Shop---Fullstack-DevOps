@@ -8,6 +8,12 @@ helm install nginx nginx-ingress/ingress-nginx \
   --set controller.publishService.enabled=true \
   --namespace nginx-ingress --create-namespace
 
+## Kubernetes Secrete to access private repository
+k create secret docker-registry pvt-regcred --docker-server=docker.io \
+> --docker-username=$DOCKER_USER \
+> --docker-password=$DOCKER_TOKEN \
+> --docker-email=$DOCKER_USER_EMAIL
+
 
 
 ## Custom instructions
