@@ -26,7 +26,7 @@ COPY --from=builder /usr/src/app/product-catalog/ ./
 EXPOSE ${PRODUCT_CATALOG_PORT}
 ENTRYPOINT [ "./product-catalog" ]
 
-###
+####
 
 # # Copyright The OpenTelemetry Authors
 # # SPDX-License-Identifier: Apache-2.0

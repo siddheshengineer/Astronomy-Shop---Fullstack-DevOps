@@ -7,7 +7,7 @@ on:
     paths:
       - 'src/ad/**' 
       - 'src/product-catalog/**' 
-      - 'src/recommendation/**''
+      - 'src/recommendation/**'
   pull_request:
     branches: ['main', 'LKE']
     paths:
