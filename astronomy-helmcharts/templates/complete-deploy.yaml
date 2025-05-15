@@ -1636,9 +1636,11 @@ spec:
         app.kubernetes.io/name: opentelemetry-demo-recommendationservice
     spec:
       serviceAccountName: opentelemetry-demo
+      imagePullSecrets:
+      - name: pvt-regcred
       containers:
         - name: recommendationservice
-          image: {{ .Values.image_name}}:{{ .Values.recommendationservice.tag }}
+          image: {{ .Values.pvt_image_name}}:{{ .Values.recommendationservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1656,6 +1658,10 @@ spec:
               value: cumulative
             - name: RECOMMENDATION_SERVICE_PORT
               value: "8080"
+            - name: RECOMMENDATION_PORT
+              value: "8080"
+            - name: PRODUCT_CATALOG_ADDR
+              value: opentelemetry-demo-productcatalogservice:8080
             - name: PRODUCT_CATALOG_SERVICE_ADDR
               value: 'opentelemetry-demo-productcatalogservice:8080'
             - name: OTEL_PYTHON_LOG_CORRELATION
