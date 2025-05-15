@@ -34,7 +34,7 @@ flagd:
   tag: v0.11.1 
 
 # Fraud detection Service
-fraud-detectionservice:
+frauddetectionservice:
   tag: 1.12.0-frauddetectionservice
 
 # FrontEnd Service
@@ -62,8 +62,8 @@ paymentservice:
   tag: 1.12.0-paymentservice
 
 # Product Catalog Service
-product-catalogservice:
-  tag: 23-product-catalogservice
+productcatalogservice:
+  tag: 26-product-catalogservice
 
 # Quotes Service
 quoteservice:

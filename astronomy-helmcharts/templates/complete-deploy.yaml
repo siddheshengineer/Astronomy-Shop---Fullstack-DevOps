@@ -969,7 +969,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: frauddetectionservice
-          image: {{ .Values.image_name}}:{{ .Values.fraud-detectionservice.tag }}
+          image: {{ .Values.image_name}}:{{ .Values.frauddetectionservice.tag }}
           imagePullPolicy: IfNotPresent
           env:
             - name: OTEL_SERVICE_NAME
@@ -1500,9 +1500,11 @@ spec:
         app.kubernetes.io/name: opentelemetry-demo-productcatalogservice
     spec:
       serviceAccountName: opentelemetry-demo
+      imagePullSecrets:
+      - name: pvt-regcred
       containers:
         - name: productcatalogservice
-          image: {{ .Values.pvt_image_name}}:{{ .Values.product-catalogservice.tag }}
+          image: {{ .Values.pvt_image_name}}:{{ .Values.productcatalogservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
@@ -1528,6 +1530,8 @@ spec:
               value: http://$(OTEL_COLLECTOR_NAME):4317
             - name: OTEL_RESOURCE_ATTRIBUTES
               value: service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=1.12.0
+            - name: PRODUCT_CATALOG_PORT
+              value: "8080"
           resources:
             limits:
               memory: 20Mi
