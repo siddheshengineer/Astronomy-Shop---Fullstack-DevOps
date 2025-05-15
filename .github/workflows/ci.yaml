@@ -5,7 +5,7 @@ on:
   push:
     branches: ['main', 'LKE']
     paths:
-      - 'src/ad/**' 
+      - 'src/ad/**'
       - 'src/product-catalog/**' 
       - 'src/recommendation/**'
   pull_request:

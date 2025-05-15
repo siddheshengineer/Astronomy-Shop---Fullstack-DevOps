@@ -506,7 +506,7 @@ spec:
       - name: pvt-regcred
       containers:
         - name: adservice
-          image: {{ .Values.image_name}}:{{ .Values.adservice.tag }}
+          image: {{ .Values.pvt_image_name}}:{{ .Values.adservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             

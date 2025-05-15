@@ -1,6 +1,5 @@
 # Copyright The OpenTelemetry Authors
 # SPDX-License-Identifier: Apache-2.0
-#
 # Modifications copyright (c) 2025 Siddhesh Nikam
 
 # Arguments
