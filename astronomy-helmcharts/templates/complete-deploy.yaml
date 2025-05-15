@@ -502,6 +502,8 @@ spec:
         app.kubernetes.io/name: opentelemetry-demo-adservice
     spec:
       serviceAccountName: opentelemetry-demo
+      imagePullSecrets:
+      - name: pvt-regcred
       containers:
         - name: adservice
           image: {{ .Values.image_name}}:{{ .Values.adservice.tag }}
