@@ -71,7 +71,7 @@ quoteservice:
 
 # Recommendation Service
 recommendationservice:
-  tag: 28-recommendationservice
+  tag: 29-recommendationservice
 
 # Shipping Service
 shippingservice:
