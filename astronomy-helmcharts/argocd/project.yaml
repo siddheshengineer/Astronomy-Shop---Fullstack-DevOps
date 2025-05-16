@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: astronomy-project # ← the logical name of this project in Argo CD
+  namespace: argocd       # ← Argo CD’s control‐plane namespace
+
+spec:
+  description: Astronomy Project
+
+  sourceRepos:
+  - 'https://github.com/siddheshengineer/Astronomy-Shop---Fullstack-DevOps.git'
+
+  destinations:
+  - namespace: astronomy
+    server: https://kubernetes.default.svc
+    name: in-cluster
+  # # Destinations also allow wildcard globbing
+  # - namespace: astronomy-*
+  #   server: https://kubernetes.default.svc
+  #   name: in-cluster
+
+  # Deny all cluster-scoped resources from being created, except for Namespace
+  clusterResourceWhitelist:
+  - group: ''
+    kind: Namespace
+
+  # Allow all namespaced-scoped resources to be created, except for ResourceQuota, LimitRange, NetworkPolicy
+  namespaceResourceBlacklist:
+  - group: ''
+    kind: ResourceQuota
+  - group: ''
+    kind: LimitRange
+  - group: ''
+    kind: NetworkPolicy

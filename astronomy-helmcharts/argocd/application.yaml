@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: astronomy-app
+  namespace: argocd
+
+spec:
+  project: astronomy-project
+  source:
+    repoURL: https://github.com/siddheshengineer/Astronomy-Shop---Fullstack-DevOps.git
+    targetRevision: LKE             # ← now tracking your LKE branch
+    path: astronomy-helmcharts      # path to your Helm chart in the repo
+    helm: 
+      valueFiles:
+        - values.yaml
+
+  destination:
+    namespace: astronomy
+    server: https://kubernetes.default.svc
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  
+    # syncOptions:
+    #   - CreateNamespace=true        # auto-create the “astronomy” ns if needed
