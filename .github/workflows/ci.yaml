@@ -149,7 +149,7 @@ jobs:
       - name: Update values.yaml
         uses: fjogeleit/yaml-update-action@main
         with:
-          valueFile: astronomy-helmcharts/values.yaml'
+          valueFile: astronomy-helmcharts/values.yaml
           propertyPath: '${{ needs.build_container_images.outputs.service }}'
           value: ${{ needs.build_container_images.outputs.image_tag }}
           commitChange: true
