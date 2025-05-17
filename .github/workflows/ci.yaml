@@ -154,6 +154,7 @@ jobs:
           value: ${{ needs.build_container_images.outputs.image_tag }}
           commitChange: true
           message: '${{ needs.build_container_images.outputs.service }} values updated to ${{ github.run_number }}'
+          createPR: false
 
       
 
