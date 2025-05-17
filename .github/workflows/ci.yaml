@@ -149,8 +149,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
+      - name: Show Git status
+        run: |
+          git status
+          git remote -v
+          git branch --show-current
+            
       - name: Update values.yaml
-        uses: fjogeleit/yaml-update-action@main
+        uses: fjogeleit/yaml-update-action@v0.16.0
         with:
           valueFile: astronomy-helmcharts/values.yaml
           propertyPath: '${{ needs.build_container_images.outputs.service }}'
