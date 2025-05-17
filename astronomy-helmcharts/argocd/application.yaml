@@ -8,8 +8,8 @@ spec:
   project: astronomy-project
   source:
     repoURL: https://github.com/siddheshengineer/Astronomy-Shop---Fullstack-DevOps.git
-    targetRevision: LKE             # ← now tracking your LKE branch
-    path: astronomy-helmcharts      # path to your Helm chart in the repo
+    targetRevision: LKE             # ← now tracking LKE branch
+    path: astronomy-helmcharts      # path to Helm chart in the repo
     helm: 
       valueFiles:
         - values.yaml
@@ -24,4 +24,4 @@ spec:
       selfHeal: true
   
     # syncOptions:
-    #   - CreateNamespace=true        # auto-create the “astronomy” ns if needed
+    #   - CreateNamespace=true        # auto-create the “astronomy” namespace if needed
