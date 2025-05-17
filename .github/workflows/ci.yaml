@@ -130,8 +130,8 @@ jobs:
       - name: Get tags
         id: image-tag
         run: |
-          echo "tag:${{ github.run_number }}-${{ matrix.service }}service" >> $GITHUB_OUTPUT
-          echo "servicename:${{ matrix.service }}service" >> $GITHUB_OUTPUT
+          echo "tag=${{ github.run_number }}-${{ matrix.service }}service" >> $GITHUB_OUTPUT
+          echo "servicename=${{ matrix.service }}service" >> $GITHUB_OUTPUT
           
 # ────── Job 3 ─────────────────────────────────────────────────────
   update_helm_file:
