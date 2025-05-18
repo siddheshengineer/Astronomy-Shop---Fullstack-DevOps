@@ -165,6 +165,7 @@ jobs:
           message: '${{ needs.build_container_images.outputs.service }} values updated to ${{ github.run_number }}'
           createPR: false
           token: ${{ secrets.GITHUB_TOKEN }}
+          branch: LKE
 
       
 
