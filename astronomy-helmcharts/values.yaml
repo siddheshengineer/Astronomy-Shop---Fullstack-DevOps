@@ -33,8 +33,8 @@ productcatalogservice:
   tag: 26-product-catalogservice
 quoteservice:
   tag: 1.12.0-quoteservice
-recommendationservice: 
-  tag: 29-recommendationservice
+recommendationservice:
+  tag: 40-recommendationservice
 shippingservice:
   tag: 1.12.0-shippingservice
 valkey:
