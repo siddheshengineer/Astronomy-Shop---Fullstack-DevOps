@@ -148,13 +148,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
-      - name: Show Git status
-        run: |
-          git status
-          git remote -v
-          git branch --show-current
-            
+                  
       - name: Update values.yaml
         uses: fjogeleit/yaml-update-action@v0.16.1
         with:
@@ -165,7 +159,7 @@ jobs:
           message: '${{ needs.build_container_images.outputs.service }} values updated to ${{ github.run_number }}'
           createPR: false
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: LKE
+          branch: ${{ github.ref_name }}
 
       
 
