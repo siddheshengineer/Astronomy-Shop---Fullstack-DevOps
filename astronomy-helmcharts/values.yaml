@@ -34,7 +34,7 @@ productcatalogservice:
 quoteservice:
   tag: 1.12.0-quoteservice
 recommendationservice:
-  tag: 40-recommendationservice
+  tag: 41-recommendationservice
 shippingservice:
   tag: 1.12.0-shippingservice
 valkey:
