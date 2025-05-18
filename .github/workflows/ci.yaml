@@ -156,7 +156,7 @@ jobs:
           git branch --show-current
             
       - name: Update values.yaml
-        uses: fjogeleit/yaml-update-action@v0.16.0
+        uses: fjogeleit/yaml-update-action@v0.16.1
         with:
           valueFile: astronomy-helmcharts/values.yaml
           propertyPath: '${{ needs.build_container_images.outputs.service }}'
