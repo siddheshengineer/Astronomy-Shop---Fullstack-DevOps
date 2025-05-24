@@ -1,0 +1,172 @@
+name: Astronomy CI Pipeline
+
+# ────── Triggers ────────────────────────────────────────────────
+on:
+  push:
+    branches: ['main', 'LKE']
+    paths:
+      - 'src/ad/**'
+      - 'src/product-catalog/**' 
+      - 'src/recommendation/**'
+  pull_request:
+    branches: ['main', 'LKE']
+    paths:
+      - 'src/ad/**' 
+      - 'src/product-catalog/**' 
+      - 'src/recommendation/**'
+            
+# ────── Global Permissions ────────────────────────────────────────
+permissions:
+  contents: read
+  packages: write
+  security-events: write
+
+# ────── Jobs ──────────────────────────────────────────────────────
+jobs:
+# ────── Job 1 ─────────────────────────────────────────────────────
+  get_changed_folder:
+    name: Getting updated Service 
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      count: ${{ steps.set-matrix.outputs.count }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Changed Folder
+        id: changed-folder
+        uses: tj-actions/changed-files@v46
+        with:
+          since_last_remote_commit: true
+        
+      - name: Matrix
+        id: set-matrix
+        shell: bash
+        run: |
+          # Create array for changed folders in '/src'
+          mapfile -t services < <(
+            printf '%s\n' "${{ steps.changed-folder.outputs.all_changed_files }}" |
+            tr ' ' '\n' |
+            grep '^src/' |
+            awk -F/ '{print $2}' |
+            sort -u
+          )
+
+          # Convert to JSON array
+          json=$(printf '%s\n' "${services[@]}" | jq -R -s -c 'split("\n")[:-1]')
+
+          # outputs
+          echo "matrix={\"service\":$json}" >>"$GITHUB_OUTPUT"
+          echo "count=$(echo "$json" | jq 'length')" >>"$GITHUB_OUTPUT"
+          echo #####
+          echo "Services changed: ${services[*]}"
+          echo "No. of changed services: $(echo "$json" | jq 'length')"
+      
+      # - name: No. of Changes services
+      #   run: |
+      #     echo "${{ steps.set-matrix.outputs.count }}"
+
+# ────── Job 2 ─────────────────────────────────────────────────────
+  build_container_images:
+    name: Build container images 
+    needs: [get_changed_folder]
+
+    # Skip the job entirely when the service list is empty
+    if: ${{ needs.get_changed_folder.outputs.count != '0' }}
+    runs-on: ubuntu-latest  
+    
+    strategy:
+      fail-fast: true
+      matrix: ${{ fromJson(needs.get_changed_folder.outputs.matrix) }}
+    
+    env:
+      REGISTRY: docker.io
+
+    outputs:
+      image_tag: ${{ steps.image-tag.outputs.tag }}
+      service: ${{ steps.image-tag.outputs.servicename }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 
+
+      - name: Login to Docker Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY}}
+          username: ${{ secrets.REG_USER }}
+          password: ${{ secrets.REG_TOKEN }}  
+
+      - name: Read .env arguments
+        id: env-arg
+        shell: bash
+        run: |
+          {
+            echo 'BUILDARGS<<EOF'
+            grep -v '^[[:space:]]*#' .env          # keep non-comment lines
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Setup Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker 
+        env:
+          IMAGE_NAME: ${{ env.REGISTRY }}/${{ secrets.REG_USER }}/${{ secrets.CONTAINER_REPOSITORY_NAME }}
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./src/${{ matrix.service }}/Dockerfile
+          push: true
+          load: true
+          tags: ${{ env.IMAGE_NAME }}:${{ github.run_number }}-${{ matrix.service }}service
+          build-args: ${{ steps.env-arg.outputs.BUILDARGS }}
+      
+      - name: Get tags
+        id: image-tag
+        run: |
+          echo "tag=${{ github.run_number }}-${{ matrix.service }}service" >> $GITHUB_OUTPUT
+          echo "servicename=${{ matrix.service }}service" >> $GITHUB_OUTPUT
+          
+# ────── Job 3 ─────────────────────────────────────────────────────
+  update_helm_file:
+    name: Update Helm Values
+    needs: [get_changed_folder, build_container_images]
+
+    # Skip the job entirely when the service list is empty
+    if: ${{ needs.get_changed_folder.outputs.count != '0' }}
+    runs-on: ubuntu-latest  
+
+    permissions:
+      contents: write # required to commit to branch
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+                  
+      - name: Update values.yaml
+        uses: fjogeleit/yaml-update-action@v0.16.1
+        with:
+          valueFile: astronomy-helmcharts/values.yaml
+          propertyPath: '${{ needs.build_container_images.outputs.service }}.tag'
+          value: ${{ needs.build_container_images.outputs.image_tag }}
+          commitChange: true
+          message: '${{ needs.build_container_images.outputs.service }} values updated to ${{ github.run_number }}'
+          createPR: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref_name }}
+
+      
+
+
+
+
+
+
+      
+    
