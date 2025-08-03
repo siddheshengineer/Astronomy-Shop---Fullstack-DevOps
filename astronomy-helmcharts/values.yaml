@@ -7,7 +7,7 @@ adservice:
 cartservice:
   tag: 1.12.0-cartservice
 checkoutservice:
-  tag: 1.12.0-checkoutservice
+  tag: 45-checkoutservice
 currencyservice:
   tag: 1.12.0-currencyservice
 emailservice:
