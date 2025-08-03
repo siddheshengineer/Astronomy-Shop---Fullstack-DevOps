@@ -8,12 +8,14 @@ on:
       - 'src/ad/**'
       - 'src/product-catalog/**' 
       - 'src/recommendation/**'
+      - 'src/checkout/**'
   pull_request:
     branches: ['main', 'LKE']
     paths:
       - 'src/ad/**' 
       - 'src/product-catalog/**' 
       - 'src/recommendation/**'
+      - 'src/checkout/**'
             
 # ────── Global Permissions ────────────────────────────────────────
 permissions:
