@@ -8,7 +8,7 @@ spec:
   project: astronomy-project
   source:
     repoURL: https://github.com/siddheshengineer/Astronomy-Shop---Fullstack-DevOps.git
-    targetRevision: LKE             # ← now tracking LKE branch
+    targetRevision: main             # ← now tracking main branch
     path: astronomy-helmcharts      # path to Helm chart in the repo
     helm: 
       valueFiles:

@@ -1,0 +1,120 @@
+apiVersion: networking.linode.com/alpha1v1
+kind: CloudFirewall
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.linode.com/alpha1v1","kind":"CloudFirewall","metadata":{"annotations":{},"creationTimestamp":"2025-05-11T16:34:18Z","finalizers":["cloudfirewalls.networking.linode.com/finalizer"],"generation":1,"name":"primary","namespace":"kube-system","ownerReferences":[{"apiVersion":"apps/v1","blockOwnerDeletion":true,"controller":true,"kind":"Deployment","name":"cloud-firewall-controller","uid":"7a41fab2-0998-4273-bc62-90836854505f"}],"resourceVersion":"123564","uid":"c089ab4e-2ed6-47d7-a4b0-2260c15aa28e"},"spec":{"ruleset":{"inbound":[{"action":"ACCEPT","addresses":{"ipv4":["0.0.0.0/0"],"ipv6":["::/0"]},"description":"ICMP Traffic","label":"allow-all-icmp","protocol":"ICMP"},{"action":"ACCEPT","addresses":{"ipv4":["192.168.128.0/17"]},"description":"Kubelet Health Checks","label":"allow-kubelet-health-checks","ports":"10250,10256","protocol":"TCP"},{"action":"ACCEPT","addresses":{"ipv4":["192.168.128.0/17"]},"description":"Cluster Wireguard Traffic","label":"allow-lke-wireguard","ports":"51820","protocol":"UDP"},{"action":"ACCEPT","addresses":{"ipv4":["192.168.128.0/17"]},"description":"Cluster DNS","label":"allow-cluster-dns-tcp","ports":"53","protocol":"TCP"},{"action":"ACCEPT","addresses":{"ipv4":["192.168.128.0/17"]},"description":"Cluster DNS","label":"allow-cluster-dns-udp","ports":"53","protocol":"UDP"},{"action":"ACCEPT","addresses":{"ipv4":["192.168.128.0/17"]},"description":"Calico BGP","label":"allow-calico-bgp","ports":"179","protocol":"TCP"},{"action":"ACCEPT","addresses":{"ipv4":["192.168.128.0/17"]},"description":"Calico Typha","label":"allow-calico-typha","ports":"5473","protocol":"TCP"},{"action":"ACCEPT","addresses":{"ipv4":["192.168.255.0/24"]},"description":"Cluster Nodeports","label":"allow-cluster-nodeports-tcp","ports":"30000-32767","protocol":"TCP"},{"action":"ACCEPT","addresses":{"ipv4":["192.168.255.0/24"]},"description":"ArgoCD Nodeports","label":"allow-argocd-nodeports-tcp","ports":"32760","protocol":"TCP"},{"action":"ACCEPT","addresses":{"ipv4":["0.0.0.0/0"]},"description":"Cluster Nodeports","label":"allow-cluster-nodeports-udp","ports":"30000-32767","protocol":"UDP"},{"action":"ACCEPT","addresses":{"ipv4":["192.168.128.0/17"]},"description":"IPENCAP Private","label":"allow-cluster-ipencap","protocol":"IPENCAP"}],"inbound_policy":"DROP","outbound_policy":"ACCEPT"}},"status":{"firewall-id":"2533422","last-update":"2025-05-11T16:34:19Z","nodes":[76733263,76733262]}}
+  creationTimestamp: "2025-05-11T16:34:18Z"
+  finalizers:
+  - cloudfirewalls.networking.linode.com/finalizer
+  generation: 2
+  name: primary
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: cloud-firewall-controller
+    uid: 7a41fab2-0998-4273-bc62-90836854505f
+  resourceVersion: "1399903"
+  uid: c089ab4e-2ed6-47d7-a4b0-2260c15aa28e
+spec:
+  ruleset:
+    inbound:
+    - action: ACCEPT
+      addresses:
+        ipv4:
+        - 0.0.0.0/0
+        ipv6:
+        - ::/0
+      description: ICMP Traffic
+      label: allow-all-icmp
+      protocol: ICMP
+    - action: ACCEPT
+      addresses:
+        ipv4:
+        - 192.168.128.0/17
+      description: Kubelet Health Checks
+      label: allow-kubelet-health-checks
+      ports: 10250,10256
+      protocol: TCP
+    - action: ACCEPT
+      addresses:
+        ipv4:
+        - 192.168.128.0/17
+      description: Cluster Wireguard Traffic
+      label: allow-lke-wireguard
+      ports: "51820"
+      protocol: UDP
+    - action: ACCEPT
+      addresses:
+        ipv4:
+        - 192.168.128.0/17
+      description: Cluster DNS
+      label: allow-cluster-dns-tcp
+      ports: "53"
+      protocol: TCP
+    - action: ACCEPT
+      addresses:
+        ipv4:
+        - 192.168.128.0/17
+      description: Cluster DNS
+      label: allow-cluster-dns-udp
+      ports: "53"
+      protocol: UDP
+    - action: ACCEPT
+      addresses:
+        ipv4:
+        - 192.168.128.0/17
+      description: Calico BGP
+      label: allow-calico-bgp
+      ports: "179"
+      protocol: TCP
+    - action: ACCEPT
+      addresses:
+        ipv4:
+        - 192.168.128.0/17
+      description: Calico Typha
+      label: allow-calico-typha
+      ports: "5473"
+      protocol: TCP
+    - action: ACCEPT
+      addresses:
+        ipv4:
+        - 192.168.255.0/24
+      description: Cluster Nodeports
+      label: allow-cluster-nodeports-tcp
+      ports: 30000-32767
+      protocol: TCP
+    - action: ACCEPT
+      addresses:
+        ipv4:
+        - "0.0.0.0/0"
+      description: ArgoCD Nodeports
+      label: allow-argocd-nodeports-tcp
+      ports: "32760"
+      protocol: TCP
+    - action: ACCEPT
+      addresses:
+        ipv4:
+        - 192.168.255.0/24
+      description: Cluster Nodeports
+      label: allow-cluster-nodeports-udp
+      ports: 30000-32767
+      protocol: UDP
+    - action: ACCEPT
+      addresses:
+        ipv4:
+        - 192.168.128.0/17
+      description: IPENCAP Private
+      label: allow-cluster-ipencap
+      protocol: IPENCAP
+    inbound_policy: DROP
+    outbound_policy: ACCEPT
+status:
+  firewall-id: "2533422"
+  last-update: "2025-05-11T16:34:19Z"
+  nodes:
+  - 76733263
+  - 76733262
