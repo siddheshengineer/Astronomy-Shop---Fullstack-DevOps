@@ -648,7 +648,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: checkoutservice
-          image: {{ .Values.image_name}}:{{ .Values.checkoutservice.tag }}
+          image: {{ .Values.pvt_image_name}}:{{ .Values.checkoutservice.tag }}
           imagePullPolicy: IfNotPresent
           ports:
             
